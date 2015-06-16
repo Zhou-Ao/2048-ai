@@ -14,12 +14,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-typedef __int64 board_t;
-typedef __int16 row_t;
+typedef unsigned __int64 board_t;
+typedef unsigned __int16 row_t;
 
 //store the depth at which the heuristic was recorded as well as the actual heuristic
 struct trans_table_entry_t{
-	__int8 depth;
+	unsigned __int8 depth;
 	float heuristic;
 };
 

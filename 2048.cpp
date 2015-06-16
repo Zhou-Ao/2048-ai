@@ -251,7 +251,7 @@ static inline int get_max_rank(board_t board) {
 }
 
 static inline int count_distinct_tiles(board_t board) {
-	__int16 bitset = 0;
+	unsigned __int16 bitset = 0;
 	while (board && board > 0) {
 		bitset |= 1 << (board & 0xf);
 		board >>= 4;
@@ -311,7 +311,7 @@ static float score_board(board_t board) {
 // Statistics and controls
 // cprob: cumulative probability
 // don't recurse into a node with a cprob less than this threshold
-static const float CPROB_THRESH_BASE = 0.0001f;
+static const float CPROB_THRESH_BASE = 0.01f;
 static const int CACHE_DEPTH_LIMIT = 6;
 
 static float score_tilechoose_node(eval_state &state, board_t board, float cprob) {
@@ -520,9 +520,9 @@ void play_game(get_move_func_t get_move) {
 		if (tile == 2) scorepenalty += 4;
 		board = insert_tile_rand(newboard, tile);
 
-		int maxrank = get_max_rank(board);
-		if (maxrank >= 11)
-			break;
+		// int maxrank = get_max_rank(board);
+		// if (maxrank >= 11)
+		// 	break;
 	}
 
 	print_board(board);
@@ -532,8 +532,7 @@ void play_game(get_move_func_t get_move) {
 int main() {
 	init_tables();
 	play_game(find_best_move);
-	//board_t board = initial_board();
-	//ask_for_move(board);
+	//play_game(ask_for_move);
 
 	int c;
 	std::cin >> c;
